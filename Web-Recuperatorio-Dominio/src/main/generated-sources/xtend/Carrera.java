@@ -17,6 +17,15 @@ public class Carrera {
     this.materias = _newArrayList;
   }
   
+  public Carrera(final String nombre, final List<Materia> materias) {
+    this.nombre = nombre;
+    this.materias = materias;
+  }
+  
+  public boolean agregarMateria(final Materia materia) {
+    return this.materias.add(materia);
+  }
+  
   @Pure
   public String getNombre() {
     return this.nombre;

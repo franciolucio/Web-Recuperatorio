@@ -1,10 +1,24 @@
-<div class = "home">
-	<div class = "mensaje">
-		<span> Estamos tratando de mejorar la oferta de horarios de la facu </span>
-		<span> Ayudanos respondiendo la encuesta, solo te tomara 10 minutos </span>
+<!doctype html>
+<html lang="es" >
+    <head>
+      	<meta charset= "UTF-8">
+      	<script src="node_modules/angular/angular.js"></script>
+    	<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
+		<script src="app.js"></script>
+  	</head>
+    
+<body data-ng-app="encuestaApp">
+	<div>
+		<div>
+			<span> Estamos tratando de mejorar la oferta de horarios de la facu </span>
+			<span> Ayudanos respondiendo la encuesta, solo te tomara 10 minutos </span>
+		</div>
+		<div class = "login">
+			<input type = "text" placeholder = "Ingresa tu mail" ng-model = "user.mail" />
+			<button type = "submit" ng-click = "autenticar()" > Responder </button>
+		</div>
 	</div>
-	<div class = "login">
-		<input type = "text" placeholder = "Ingresa tu mail" ng-model = "user.mail" />
-		<button type = "submit" ng-click = "autenticar()" > Responder </button>
-	</div>
-</div>
+</body>
+</html>

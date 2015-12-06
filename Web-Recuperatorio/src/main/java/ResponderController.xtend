@@ -28,16 +28,16 @@ extension JSONUtils = new JSONUtils
 	def Result responder ( @Body String body ) {
 		var Respuesta respuesta = body.fromJson(Respuesta)
 		val Carrera carrera = RepoCarrera.instance.findCarrera(respuesta.carreraId)
-		if (! respuesta . materias . forall [ materia | carrera . tieneEnPlanDeEstudio ( materia )] ){
-		throw new ErrorEnLaRespuesta 
+		if (! respuesta.materiasACursar.forall[materia|carrera.tieneEnPlanDeEstudio(materia)]){
+			throw new ErrorEnLaRespuesta 
 		}
-		var Encuesta encuesta = respuesta .generarEncuesta ();
-		RepoEncuesta . instance . agregarRespuesta ( respuesta . mail , encuesta)
+		var Encuesta encuesta = respuesta.generarEncuesta ();
+		RepoEncuesta.instance.agregarRespuesta(respuesta.mail , encuesta)
 		ok ();
 	}*/
 
 	def static void main ( String [] args ) {
-	XTRest . start ( ResponderController , 9200)
+	XTRest . start ( ResponderController , 8000)
 	}
 }
 

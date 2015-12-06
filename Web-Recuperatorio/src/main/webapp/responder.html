@@ -1,24 +1,38 @@
+<!doctype html>
+<html lang="es" >
+    <head>
+      	<meta charset= "UTF-8">
+      	<script src="node_modules/angular/angular.js"></script>
+    	<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
+		<script src="app.js"></script>
+  	</head>
+    
+<body data-ng-app="encuestaApp">
+
+
 <div class = "container">
-	<h3> Intención de cursada </h3>
-	<span> Elegí la carrera que estudias </span>
+	<h3> Intenci&#243n de cursada </h3>
+	<span> Elegir la carrera que estudias </span>
 	<select class = "form-control" ng-options = "carrera as carrera.label for carrera in
-	carreras" ng-model = "carreraSeleccionada" ></select>
-	<span> Año en el que ingresaste a la facu </span>
+	carreras" ng-model = "carreraSeleccionada" style="width:200px"></select>
+	<span> A&#241o en el que ingresaste a la facu </span>
 	<input class = "form-control" type = "text" ng-model = "respuesta.anioIngreso" />
-	<span> ¿Cuantos finales aprobaste? </span>
+	<span> &#191Cuantos finales aprobaste? </span>
 	<input class = "form-control" type = "text" ng-model = "respuesta.finalesAprobados" />
-	<span> ¿Cuantos finales desaprobaste? </span>
+	<span> &#191Cuantos finales desaprobaste? </span>
 	<input class = "form-control" type = "text" ng-model = "respuesta.finalesDesaprobados" />
-	<span> ¿Cuantos materias aprobaste la cursada? </span>
+	<span> &#191Cuantos materias aprobaste la cursada? </span>
 	<input class = "form-control" type = "text" ng-model = "respuesta.cursadasAprobadas" />
-	<p> ¿A que materias pensas Anotarte el proximo cuatrimestre? </p>
+	<p> &#191A que materias pensas Anotarte el proximo cuatrimestre? </p>
 	<div class = "col-md-8">
 		<span> Materia </span>
 		<select class = "form-control" ng-options = "materia as materia.label for materia in
-		carreraSeleccionada.materias" ng-model = "materiaSeleccionada" ></select>
+		carreraSeleccionada.materias" ng-model = "materiaSeleccionada" style="width:200px"></select>
 		<span> Turno </span>
 		<select class = "form-control" ng-options = "turno as turno.label for turno in turnos"
-		ng-model = "turnoSeleccionado" ></select>
+		ng-model = "turnoSeleccionado" style="width:200px"></select>
 		<button type = "submit" class = "btn btn-primary btn-block" ng-click = "agregarMateria()" > Agregar </button>
 	</div>
 	<div class = "col-md-4" >
@@ -28,4 +42,6 @@
 	</div>
 	<button type = "submit" class = "btn btn-primary btn-block" ng-click = "contestar()" > Enviar Respuestas </button>
 </div>
+</body>
+</html>
 	

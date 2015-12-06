@@ -7,9 +7,17 @@ class Carrera {
 	String nombre
 	List<Materia> materias
 	
-	new( String nombre){
-	this.nombre = nombre
-	this.materias = newArrayList
+	new(String nombre){
+		this.nombre=nombre
+		materias = newArrayList
+	}
 	
+	new(String nombre, List<Materia> materias){
+		this.nombre = nombre
+		this.materias = materias
+	}
+	
+	def agregarMateria(Materia materia){
+		materias.add(materia)
 	}
 }
