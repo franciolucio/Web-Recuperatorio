@@ -26,7 +26,7 @@ app.service ('EncuestaService' , function ( $http ) {
 
 app.controller ( 'LoginCtrl' , function ( $location ) {
 		$scope . autenticar = function (){
-		$location . path ( 'responder/' + $scope . user . mail );
+			$location . path ( 'responder/' + $scope . user . mail );
 	}
 });
 
