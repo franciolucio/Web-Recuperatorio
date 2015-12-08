@@ -7,11 +7,7 @@ app.config(function($stateProvider, $urlRouterProvider){
 	$stateProvider.state('login',{
 		    url: '/login',
 		    templateUrl: 'login.html',
-		    controller: function($scope, $http, $state) {
-            	$scope.autenticar = function() {
-                    $state.go('responder');
-            	}
-            }
+		    controller: 'LoginCtrl'
 		  });
 	$stateProvider.state('responder',{
 		    url: '/responder',
@@ -29,7 +25,8 @@ app.config(function($stateProvider, $urlRouterProvider){
 //		$http.get('/responder',respuesta).success(callback);
 //		},
 
-app.controller('LoginCtrl',['$state','$scope',function($state,$scope){
+app.controller('LoginCtrl',['$state','$http','$scope',function($state,$http,$scope){
+		
 		$scope.autenticar=function(){
 			$state.go('responder');
 	}
@@ -44,9 +41,8 @@ app.controller('ResponderCtrl',['$state','$http','$scope',function($state,$http,
 	$http.get('turnos').success(function(response){
 		$scope.turnos = response;
 	});
-	//$scope.turnos=EncuestaService.getTurnos();
-	//$scope.carreras=EncuestaService.getCarreras();
-	//$scope.respuesta={mail:$routeParams.mail,materias:[]};
+	
+	$scope.respuesta={materias:[]};
 	$scope.agregarMateria=function(){
 	$scope.respuesta.materias.push({materia:$scope.materiaSeleccionada,turno:
 	$scope.turnoSeleccionado});
@@ -55,27 +51,24 @@ app.controller('ResponderCtrl',['$state','$http','$scope',function($state,$http,
 	}
 
 	$scope.contestar=function(){
-//	//Checkeamos los campos obligatorios
-//	if($scope.respuesta.materias.length<= 0){
-//		alert('Debe ingresar materias para continuar');
-//		return;
-//	}
-//
-//	if(!$scope.carreraSeleccionada){
-//		alert('Debe seleccionar una carrera');
-//		return;
-//	}
-//
-//	if(!$scope.respuesta.anioIngreso){
-//		alert('Debe indicar el año de ingreso a la facultad');
-//	return;
-//	}
-//
-//	//Todo OK, impactamos en el server
-//		$scope.respuesta.carreraId=$scope.carreraSeleccionada.id;
+	//Checkeamos los campos obligatorios
+	if($scope.respuesta.materias.length<= 0){
+		alert('Debe ingresar materias para continuar');
+		return;
+	}
+
+	if(!$scope.carreraSeleccionada){
+		alert('Debe seleccionar una carrera');
+		return;
+	}
+
+	if(!$scope.respuesta.anioIngreso){
+		alert('Debe indicar el año de ingreso a la facultad');
+	return;
+	}
+
+	//Todo OK, impactamos en el server
+		$scope.respuesta.carreraId=$scope.carreraSeleccionada.id;
 		$state.go('gracias');
-		//EncuestaService.responderEncuesta($scope.respuesta,function(data){
-		//$location.path('gracias');
-		//});
 	}
 }]);

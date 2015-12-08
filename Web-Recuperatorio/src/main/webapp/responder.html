@@ -1,20 +1,6 @@
-<!doctype html>
-<html lang="es"  ng-app="app">
-    <head>
-      	<meta charset= "UTF-8">
-      	<script src="node_modules/angular/angular.min.js"></script>
-      	<script src="node_modules/jquery/dist/jquery.js"></script>
-    	<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    	<script src="node_modules/angular-route/angular-route.js"></script>
-    	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
-		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
-		<script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-		<script src="app.js"></script>
-  	</head>
-    
-<body data-ng-controller="ResponderCtrl">
-<div data-ui-view>
-<div class = "container">
+<div class = "container" data-ng-controller="ResponderCtrl">
+<div class="col-md-4"></div>
+<div class="col-md-4">
 	
 	<h3> Intenci&#243n de cursada </h3>
 	<span> Elegir la carrera que estudias </span>
@@ -28,23 +14,24 @@
 	<input class = "form-control" type = "text" ng-model = "respuesta.finalesDesaprobados" />
 	<span> &#191Cuantos materias aprobaste la cursada? </span>
 	<input class = "form-control" type = "text" ng-model = "respuesta.cursadasAprobadas" />
-	<p> &#191A que materias pensas Anotarte el proximo cuatrimestre? </p>
-	<div class = "col-md-8">
+	<p style="margin-top: 10px;margin-bottom: 0px"> &#191A que materias pensas Anotarte el proximo cuatrimestre? </p>
+	<div>
 		<span> Materia </span>
 		<select class = "form-control" ng-options = "materia as materia.descripcion for materia in
 		carreraSeleccionada.materias" ng-model = "materiaSeleccionada" ></select>
 		<span> Turno </span>
 		<select class = "form-control" ng-options = "turno for turno in turnos"
 		ng-model = "turnoSeleccionado"></select>
-		<button type = "submit" class = "btn btn-primary btn-block" ng-click = "agregarMateria()" > Agregar </button>
+		<button style="margin-top: 5px" type = "submit" class = "btn btn-primary btn-block" ng-click = "agregarMateria()" > Agregar </button>
 	</div>
-	<div class = "col-md-4" >
+	<div>
 		<div ng-repeat = "porCursar in respuesta.materias">
 			<h4> {{porCursar.materia.descripcion}} - <small> {{porCursar.turno}} </small></h4>
 		</div>
 	</div>
 	<button type = "submit" class = "btn btn-primary btn-block" ng-click = "contestar()" > Enviar Respuestas </button>
 </div>
-</body>
-</html>
+<div class="col-md-4"></div>
+</div>
+
 	

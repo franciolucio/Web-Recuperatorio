@@ -1,27 +1,13 @@
-<!doctype html>
-<html lang="es" ng-app="app">
-    <head>
-      	<meta charset= "UTF-8">
-      	<script src="node_modules/angular/angular.min.js"></script>
-      	<script src="node_modules/jquery/dist/jquery.js"></script>
-    	<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
-    	<script src="node_modules/angular-route/angular-route.js"></script>
-    	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
-		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
-		<script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-		<script src="app.js"></script>
-  	</head>
-    
-<body data-ng-controller="LoginCtrl">
-	<div>
-		<div>
-			<span> Estamos tratando de mejorar la oferta de horarios de la facu </span>
-			<span> Ayudanos respondiendo la encuesta, solo te tomara 10 minutos </span>
+<div data-ng-controller="LoginCtrl" >
+		<div class ="box">
+			<span> 
+				Estamos tratando de mejorar la oferta de horarios de la facu. Ayudanos respondiendo la encuesta, solo te tomara 10 minutos. 
+			</span>
 		</div>
-		<div>
-			<input type = "text" placeholder = "Ingresa tu mail" ng-model = "user.mail" />
-			<button type = "button" ng-click = "autenticar" > Responder </button>
+		<div class ="margen">
+			<input class ="margen" style="padding:5px;width:500px" type = "text" placeholder = "Ingresa tu mail" ng-model = "user.mail" />
 		</div>
-	</div>
-</body>
-</html>
+		<div class ="margen">
+			<button type = "submit" class= "btn btn-success" style="padding: 5px;width: 500px" ng-click = "autenticar()" > Responder </button>
+		</div>
+</div>
