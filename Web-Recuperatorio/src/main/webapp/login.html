@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es" >
+<html lang="es" ng-app="app">
     <head>
       	<meta charset= "UTF-8">
       	<script src="node_modules/angular/angular.min.js"></script>
@@ -8,18 +8,19 @@
     	<script src="node_modules/angular-route/angular-route.js"></script>
     	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
 		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.css">
+		<script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
 		<script src="app.js"></script>
   	</head>
     
-<body data-ng-app="encuestaApp">
+<body data-ng-controller="LoginCtrl">
 	<div>
 		<div>
 			<span> Estamos tratando de mejorar la oferta de horarios de la facu </span>
 			<span> Ayudanos respondiendo la encuesta, solo te tomara 10 minutos </span>
 		</div>
-		<div class = "login">
+		<div>
 			<input type = "text" placeholder = "Ingresa tu mail" ng-model = "user.mail" />
-			<button type = "submit" ng-click = "autenticar()" > Responder </button>
+			<button type = "button" ng-click = "autenticar" > Responder </button>
 		</div>
 	</div>
 </body>

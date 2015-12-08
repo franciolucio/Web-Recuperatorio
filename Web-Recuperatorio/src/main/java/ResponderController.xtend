@@ -23,6 +23,13 @@ extension JSONUtils = new JSONUtils
 		response . contentType = ContentType . APPLICATION_JSON
 		ok(turnos.toJson)
 	}
+	
+	@Get ('/carrera')
+	def Result carrera (){
+		val carrera = new RepoCarrera().carrera01
+		response . contentType = ContentType . APPLICATION_JSON
+		ok(carrera.toJson)
+	}
 
 	/* @Post ( '/responder')
 	def Result responder ( @Body String body ) {
@@ -37,7 +44,7 @@ extension JSONUtils = new JSONUtils
 	}*/
 
 	def static void main ( String [] args ) {
-	XTRest . start ( ResponderController , 8000)
+	XTRest . start ( ResponderController , 9000)
 	}
 }
 

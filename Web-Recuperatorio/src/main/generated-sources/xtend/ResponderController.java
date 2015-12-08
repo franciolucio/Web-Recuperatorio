@@ -50,6 +50,19 @@ public class ResponderController extends ResultFactory {
     return _xblockexpression;
   }
   
+  @Get("/carrera")
+  public Result carrera(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
+    Result _xblockexpression = null;
+    {
+      RepoCarrera _repoCarrera = new RepoCarrera();
+      final Carrera carrera = _repoCarrera.getCarrera01();
+      response.setContentType(ContentType.APPLICATION_JSON);
+      String _json = this._jSONUtils.toJson(carrera);
+      _xblockexpression = ResultFactory.ok(_json);
+    }
+    return _xblockexpression;
+  }
+  
   /**
    * @Post ( '/responder')
    * def Result responder ( @Body String body ) {
@@ -64,7 +77,7 @@ public class ResponderController extends ResultFactory {
    * }
    */
   public static void main(final String[] args) {
-    XTRest.start(ResponderController.class, 8000);
+    XTRest.start(ResponderController.class, 9000);
   }
   
   public void handle(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) throws IOException, ServletException {
@@ -102,6 +115,23 @@ public class ResponderController extends ResultFactory {
     	    return;
     	}
     }
+    {
+    	Matcher matcher = 
+    		Pattern.compile("/carrera").matcher(target);
+    	if (request.getMethod().equalsIgnoreCase("Get") && matcher.matches()) {
+    		// take parameters from request
+    		
+    		// take variables from url
+    		
+    		
+    	    Result result = carrera(target, baseRequest, request, response);
+    	    result.process(response);
+    	    
+    		response.addHeader("Access-Control-Allow-Origin", "*");
+    	    baseRequest.setHandled(true);
+    	    return;
+    	}
+    }
     this.pageNotFound(baseRequest, request, response);
   }
   
@@ -122,6 +152,11 @@ public class ResponderController extends ResultFactory {
     	+ "			<tr>"
     	+ "				<td>GET</td>"
     	+ "				<td>/turnos</td>"
+    	+ "				<td></td>"
+    	+ "			</tr>"
+    	+ "			<tr>"
+    	+ "				<td>GET</td>"
+    	+ "				<td>/carrera</td>"
     	+ "				<td></td>"
     	+ "			</tr>"
     	+ "		</tbody>"
