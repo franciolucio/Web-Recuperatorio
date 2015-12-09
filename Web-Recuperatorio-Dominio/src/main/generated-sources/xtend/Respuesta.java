@@ -36,36 +36,36 @@ public class Respuesta {
   
   public void validar() {
     try {
-      boolean _and = false;
-      boolean _and_1 = false;
-      boolean _and_2 = false;
-      boolean _and_3 = false;
+      boolean _or = false;
+      boolean _or_1 = false;
+      boolean _or_2 = false;
+      boolean _or_3 = false;
       boolean _equals = Objects.equal(this.carrera, null);
-      if (!_equals) {
-        _and_3 = false;
+      if (_equals) {
+        _or_3 = true;
       } else {
         boolean _equals_1 = Objects.equal(this.anioIngreso, null);
-        _and_3 = _equals_1;
+        _or_3 = _equals_1;
       }
-      if (!_and_3) {
-        _and_2 = false;
+      if (_or_3) {
+        _or_2 = true;
       } else {
         boolean _equals_2 = Objects.equal(this.finalesAprobados, null);
-        _and_2 = _equals_2;
+        _or_2 = _equals_2;
       }
-      if (!_and_2) {
-        _and_1 = false;
+      if (_or_2) {
+        _or_1 = true;
       } else {
         boolean _equals_3 = Objects.equal(this.finalesDesaprobados, null);
-        _and_1 = _equals_3;
+        _or_1 = _equals_3;
       }
-      if (!_and_1) {
-        _and = false;
+      if (_or_1) {
+        _or = true;
       } else {
         boolean _equals_4 = Objects.equal(this.cursadasAprobadas, null);
-        _and = _equals_4;
+        _or = _equals_4;
       }
-      if (_and) {
+      if (_or) {
         throw new RespuestaException();
       }
     } catch (Throwable _e) {

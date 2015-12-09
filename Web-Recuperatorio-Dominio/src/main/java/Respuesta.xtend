@@ -32,12 +32,11 @@ class Respuesta {
 //	}
 	
 	def validar() {
-		if(	carrera == null && 
-			anioIngreso == null && 
-			finalesAprobados == null &&  
-			finalesDesaprobados == null && 
-			cursadasAprobadas == null //&&
-			//materiasACursar == null
+		if(	carrera == null || 
+			anioIngreso == null ||
+			finalesAprobados == null ||
+			finalesDesaprobados == null || 
+			cursadasAprobadas == null
 			){
 			throw new RespuestaException();
 		}
