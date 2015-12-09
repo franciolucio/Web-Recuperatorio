@@ -11,6 +11,9 @@ public class Carrera {
   
   private List<Materia> materias;
   
+  public Carrera() {
+  }
+  
   public Carrera(final String nombre) {
     this.nombre = nombre;
     ArrayList<Materia> _newArrayList = CollectionLiterals.<Materia>newArrayList();

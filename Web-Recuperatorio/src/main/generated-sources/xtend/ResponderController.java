@@ -7,11 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.uqbar.xtrest.api.Result;
 import org.uqbar.xtrest.api.XTRest;
+import org.uqbar.xtrest.api.annotation.Body;
 import org.uqbar.xtrest.api.annotation.Controller;
 import org.uqbar.xtrest.api.annotation.Get;
+import org.uqbar.xtrest.api.annotation.Post;
 import org.uqbar.xtrest.http.ContentType;
 import org.uqbar.xtrest.json.JSONUtils;
 import org.uqbar.xtrest.result.ResultFactory;
@@ -61,6 +64,61 @@ public class ResponderController extends ResultFactory {
       _xblockexpression = ResultFactory.ok(_json);
     }
     return _xblockexpression;
+  }
+  
+  @Get("/respuestas")
+  public Result respuestas(final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
+    Result _xblockexpression = null;
+    {
+      RepoEncuesta _repoEncuesta = new RepoEncuesta();
+      final List<Respuesta> respuestas = _repoEncuesta.getRespuestas();
+      response.setContentType(ContentType.APPLICATION_JSON);
+      String _json = this._jSONUtils.toJson(respuestas);
+      _xblockexpression = ResultFactory.ok(_json);
+    }
+    return _xblockexpression;
+  }
+  
+  @Post("/answers")
+  public Result agregarRespuesta(@Body final String body, final String target, final Request baseRequest, final HttpServletRequest request, final HttpServletResponse response) {
+    try {
+      Result _xblockexpression = null;
+      {
+        response.setContentType(ContentType.APPLICATION_JSON);
+        Result _xtrycatchfinallyexpression = null;
+        try {
+          Result _xblockexpression_1 = null;
+          {
+            Respuesta nuevaRespuesta = this._jSONUtils.<Respuesta>fromJson(body, Respuesta.class);
+            nuevaRespuesta.validar();
+            RepoEncuesta _repoEncuesta = new RepoEncuesta();
+            Carrera _carrera = nuevaRespuesta.getCarrera();
+            Integer _anioIngreso = nuevaRespuesta.getAnioIngreso();
+            Integer _finalesAprobados = nuevaRespuesta.getFinalesAprobados();
+            Integer _finalesDesaprobados = nuevaRespuesta.getFinalesDesaprobados();
+            Integer _cursadasAprobadas = nuevaRespuesta.getCursadasAprobadas();
+            String _mailDelEncuestado = nuevaRespuesta.getMailDelEncuestado();
+            List<Materia> _materiasACursar = nuevaRespuesta.getMateriasACursar();
+            Respuesta _agregarRespuesta = _repoEncuesta.agregarRespuesta(_carrera, _anioIngreso, _finalesAprobados, _finalesDesaprobados, _cursadasAprobadas, _mailDelEncuestado, _materiasACursar);
+            nuevaRespuesta = _agregarRespuesta;
+            String _json = this._jSONUtils.toJson(nuevaRespuesta);
+            _xblockexpression_1 = ResultFactory.ok(_json);
+          }
+          _xtrycatchfinallyexpression = _xblockexpression_1;
+        } catch (final Throwable _t) {
+          if (_t instanceof RespuestaException) {
+            final RespuestaException e = (RespuestaException)_t;
+            throw new RespuestaException();
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
+        _xblockexpression = _xtrycatchfinallyexpression;
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   /**
@@ -132,6 +190,41 @@ public class ResponderController extends ResultFactory {
     	    return;
     	}
     }
+    {
+    	Matcher matcher = 
+    		Pattern.compile("/respuestas").matcher(target);
+    	if (request.getMethod().equalsIgnoreCase("Get") && matcher.matches()) {
+    		// take parameters from request
+    		
+    		// take variables from url
+    		
+    		
+    	    Result result = respuestas(target, baseRequest, request, response);
+    	    result.process(response);
+    	    
+    		response.addHeader("Access-Control-Allow-Origin", "*");
+    	    baseRequest.setHandled(true);
+    	    return;
+    	}
+    }
+    {
+    	Matcher matcher = 
+    		Pattern.compile("/answers").matcher(target);
+    	if (request.getMethod().equalsIgnoreCase("Post") && matcher.matches()) {
+    		// take parameters from request
+    		String body = readBodyAsString(request);
+    		
+    		// take variables from url
+    		
+    		
+    	    Result result = agregarRespuesta(body, target, baseRequest, request, response);
+    	    result.process(response);
+    	    
+    		response.addHeader("Access-Control-Allow-Origin", "*");
+    	    baseRequest.setHandled(true);
+    	    return;
+    	}
+    }
     this.pageNotFound(baseRequest, request, response);
   }
   
@@ -158,6 +251,16 @@ public class ResponderController extends ResultFactory {
     	+ "				<td>GET</td>"
     	+ "				<td>/carrera</td>"
     	+ "				<td></td>"
+    	+ "			</tr>"
+    	+ "			<tr>"
+    	+ "				<td>GET</td>"
+    	+ "				<td>/respuestas</td>"
+    	+ "				<td></td>"
+    	+ "			</tr>"
+    	+ "			<tr>"
+    	+ "				<td>POST</td>"
+    	+ "				<td>/answers</td>"
+    	+ "				<td>body</td>"
     	+ "			</tr>"
     	+ "		</tbody>"
     	+ "	</table>"

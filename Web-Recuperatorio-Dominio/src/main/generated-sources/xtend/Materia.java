@@ -8,6 +8,9 @@ public class Materia {
   
   private String descripcion;
   
+  public Materia() {
+  }
+  
   public Materia(final String descripcion, final Turno turno) {
     this.turno = turno;
     this.descripcion = descripcion;

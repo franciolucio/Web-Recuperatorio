@@ -7,6 +7,9 @@ class Carrera {
 	String nombre
 	List<Materia> materias
 	
+	
+	new () {}
+	
 	new(String nombre){
 		this.nombre=nombre
 		materias = newArrayList

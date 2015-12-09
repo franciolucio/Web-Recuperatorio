@@ -1,7 +1,9 @@
 import org.uqbar.xtrest.api.Result
 import org.uqbar.xtrest.api.XTRest
+import org.uqbar.xtrest.api.annotation.Body
 import org.uqbar.xtrest.api.annotation.Controller
 import org.uqbar.xtrest.api.annotation.Get
+import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.http.ContentType
 import org.uqbar.xtrest.json.JSONUtils
 
@@ -30,6 +32,27 @@ extension JSONUtils = new JSONUtils
 		response . contentType = ContentType . APPLICATION_JSON
 		ok(carrera.toJson)
 	}
+	
+	@Get ('/respuestas')
+	def Result respuestas (){
+		val respuestas = new RepoEncuesta().respuestas
+		response . contentType = ContentType . APPLICATION_JSON
+		ok(respuestas.toJson)
+	}
+	
+	@Post('/answers')
+    def Result agregarRespuesta(@Body String body) {
+    	response.contentType = ContentType.APPLICATION_JSON
+    	try {
+	    	var nuevaRespuesta = body.fromJson(Respuesta)
+	    	nuevaRespuesta.validar
+	    	nuevaRespuesta = new RepoEncuesta().agregarRespuesta(nuevaRespuesta.carrera,nuevaRespuesta.anioIngreso,nuevaRespuesta.finalesAprobados,nuevaRespuesta.finalesDesaprobados,nuevaRespuesta.cursadasAprobadas,nuevaRespuesta.mailDelEncuestado,nuevaRespuesta.materiasACursar)
+	    	ok(nuevaRespuesta.toJson)
+    	}
+    	catch (RespuestaException e) {
+    		throw new RespuestaException() 
+    	}
+    }
 
 	/* @Post ( '/responder')
 	def Result responder ( @Body String body ) {

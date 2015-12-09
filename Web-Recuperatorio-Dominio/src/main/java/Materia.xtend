@@ -6,6 +6,7 @@ class Materia {
 	Turno turno
 	String descripcion
 
+	new () {}
 	new ( String descripcion , Turno turno ){
 	this.turno = turno
 	this.descripcion = descripcion

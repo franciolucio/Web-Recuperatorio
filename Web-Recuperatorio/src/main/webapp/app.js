@@ -27,9 +27,18 @@ app.config(function($stateProvider, $urlRouterProvider){
 
 app.controller('LoginCtrl',['$state','$http','$scope',function($state,$http,$scope){
 		
-		$scope.autenticar=function(){
-			$state.go('responder');
-	}
+		$scope.autenticar=function(email){
+			$http.get('respuestas').success(function(response){
+				var respuestas = response;
+				for(i = 0; i < respuestas.length; i++){
+					if (email == respuestas[i].mailDelEncuestado){
+						alert('Usted ya completo la encuentas. No puede volver a completarla');
+						return;
+					}
+				}
+				$state.go('responder');
+			});
+		}
 }]);
 
 app.controller('ResponderCtrl',['$state','$http','$scope',function($state,$http,$scope){
@@ -51,24 +60,25 @@ app.controller('ResponderCtrl',['$state','$http','$scope',function($state,$http,
 	}
 
 	$scope.contestar=function(){
-	//Checkeamos los campos obligatorios
-	if($scope.respuesta.materias.length<= 0){
-		alert('Debe ingresar materias para continuar');
-		return;
-	}
-
-	if(!$scope.carreraSeleccionada){
-		alert('Debe seleccionar una carrera');
-		return;
-	}
-
-	if(!$scope.respuesta.anioIngreso){
-		alert('Debe indicar el año de ingreso a la facultad');
-	return;
-	}
-
-	//Todo OK, impactamos en el server
-		$scope.respuesta.carreraId=$scope.carreraSeleccionada.id;
-		$state.go('gracias');
-	}
+		
+		//$scope.respuesta.carreraId=$scope.carreraSeleccionada.id;
+		
+		var resp =  {
+			      		carrera:$scope.carreraSeleccionada,
+			      		anioIngreso:$scope.respuesta.anioIngreso,
+			      		finalesAprobados:$scope.respuesta.finalesAprobados,
+			      		finalesDesaprobados:$scope.respuesta.finalesDesaprobados,
+			      		cursadasAprobadas:$scope.respuesta.cursadasAprobadas,
+			      		mailDelEncuestado:"emi@soyrepiola.com",
+				      	materiasACursar:$scope.materiaSeleccionada
+			    };
+		
+			$http.post('/answers',resp).success(function(response){
+	    		$scope.answers = response;
+	    		$state.go('gracias');
+	    	}).error(function() {
+	    		  alert('Hay campos sin completar');
+	    		  return;
+	    		});
+			}
 }]);
