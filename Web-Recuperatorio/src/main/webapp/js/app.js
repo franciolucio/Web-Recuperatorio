@@ -6,24 +6,20 @@ app.config(function($stateProvider, $urlRouterProvider){
 	
 	$stateProvider.state('login',{
 		    url: '/login',
-		    templateUrl: 'login.html',
+		    templateUrl: 'templates/login.html',
 		    controller: 'LoginCtrl'
 		  });
 	$stateProvider.state('responder',{
 		    url: '/responder',
 		    controller: 'ResponderCtrl',
-		    templateUrl: 'responder.html'
+		    templateUrl: 'templates/responder.html'
 		  });
 	$stateProvider.state('gracias',{
 		    url: '/gracias',
 		    controller: 'ResponderCtrl',
-		    templateUrl: 'gracias.html'
+		    templateUrl: 'templates/gracias.html'
 		  });
 });
-
-//		responderEncuesta:function(respuesta,callback){
-//		$http.get('/responder',respuesta).success(callback);
-//		},
 
 app.controller('LoginCtrl',['$state','$http','$scope',function($state,$http,$scope){
 		
@@ -60,16 +56,12 @@ app.controller('ResponderCtrl',['$state','$http','$scope',function($state,$http,
 	}
 
 	$scope.contestar=function(){
-		
-		//$scope.respuesta.carreraId=$scope.carreraSeleccionada.id;
-		
-		var resp =  {
-			      		carrera:$scope.carreraSeleccionada,
+		var resp =  {	carrera:$scope.carreraSeleccionada,
 			      		anioIngreso:$scope.respuesta.anioIngreso,
 			      		finalesAprobados:$scope.respuesta.finalesAprobados,
 			      		finalesDesaprobados:$scope.respuesta.finalesDesaprobados,
 			      		cursadasAprobadas:$scope.respuesta.cursadasAprobadas,
-			      		mailDelEncuestado:"emi@soyrepiola.com",
+			      		mailDelEncuestado:"lucho_boca20@hotmail.com",
 				      	materiasACursar:$scope.materiaSeleccionada
 			    };
 		

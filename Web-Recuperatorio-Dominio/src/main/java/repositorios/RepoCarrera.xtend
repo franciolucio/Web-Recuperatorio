@@ -1,4 +1,9 @@
+package repositorios
+
 import java.util.List
+import model.Carrera
+import model.Materia
+import model.Turno
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors

@@ -1,3 +1,4 @@
+package model
 
 class RespuestaException extends Exception {
 	
